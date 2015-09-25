@@ -1,5 +1,7 @@
 package ru.chikalin.kirill.rocketchat.server;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,6 +22,7 @@ public class Message {
     private String username;
     private Date date;
     private Location location;
+    private String photo;
 
     public Message() {
     }
@@ -62,5 +65,13 @@ public class Message {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

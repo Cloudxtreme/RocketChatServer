@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 
 @Configuration
 public class SpringMongoConfig extends AbstractMongoConfiguration {
@@ -22,6 +23,11 @@ public class SpringMongoConfig extends AbstractMongoConfiguration {
 		final String mongoPort = getEnv("MONGO_PORT_27017_TCP_PORT", "27017");
 		System.out.println("MONGO = " + mongoAddress);
 		return new MongoClient(mongoAddress, Integer.parseInt(mongoPort));
+	}
+
+	@Bean
+	public GridFsTemplate gridFsTemplate() throws Exception {
+		return new GridFsTemplate(mongoDbFactory(), mappingMongoConverter());
 	}
 
 	public static String getEnv(String name, String defaultValue) {
