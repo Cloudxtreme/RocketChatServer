@@ -47,10 +47,11 @@ public class MessagesController {
 
     @RequestMapping(value = "/sendLocation", method = RequestMethod.POST)
     public ResponseEntity<Message> sendLocation(@RequestParam(required = false, defaultValue = "guest") String username,
-                                                @RequestParam(required = true) float latitude,
-                                                @RequestParam(required = true) float longitude) throws IllegalArgumentException {
+                                                @RequestParam(required = true) double latitude,
+                                                @RequestParam(required = true) double longitude) throws IllegalArgumentException {
         Message message = new Message();
-        message.setLocation(new Location(latitude, longitude));
+        message.setLatitude(latitude);
+        message.setLongitude(longitude);
         message.setUsername(username);
         message.setDate(new Date());
         repository.save(message);

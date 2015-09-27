@@ -1,11 +1,15 @@
 package ru.chikalin.kirill.rocketchat.server;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
+import java.util.DoubleSummaryStatistics;
 
 /**
  * Сообщение
@@ -21,8 +25,9 @@ public class Message {
     private String text;
     private String username;
     private Date date;
-    private Location location;
     private String photo;
+    private Double latitude;
+    private Double longitude;
 
     public Message() {
     }
@@ -43,6 +48,22 @@ public class Message {
                 '}';
     }
 
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
     public void setUsername(String chat) {
         this.username = chat;
     }
@@ -59,13 +80,6 @@ public class Message {
         return date;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
 
     public String getPhoto() {
         return photo;
